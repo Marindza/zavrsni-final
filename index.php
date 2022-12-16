@@ -1,20 +1,26 @@
 <?php
-    // ako su mysql username/password i ime baze na vasim racunarima drugaciji
-    // obavezno ih ovde zamenite
-    $servername = "127.0.0.1";
+    $servername = "localhost";
     $username = "root";
     $password = "";
-    $dbname = "vivify_blog";
+    $dbname = "blog";
 
-    try {
-        $connection = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
-        // set the PDO error mode to exception
-        $connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    // try {
+    //     $connection = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
+    //     // set the PDO error mode to exception
+    //     $connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    // }
+    // catch(PDOException $e)
+    // {
+    //     echo $e->getMessage();
+    // }
+    $connection = mysqli_connect($servername,$username,$password,$dbname);
+
+    if (!$connection){
+        die("Failed");
     }
-    catch(PDOException $e)
-    {
-        echo $e->getMessage();
-    }
+    $sql = "SELECT * FROM `posts` ORDER BY created_at DESC";
+    $result = mysqli_query($connection,$sql);
+    mysqli_close($connection);
 ?>
 
 <!DOCTYPE html>
