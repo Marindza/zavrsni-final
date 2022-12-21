@@ -1,6 +1,16 @@
-<div class="blog-post">
-    <h2 class="blog-post-title"><?php echo $row['title'] ?></h2>
-    <p class="blog-post-meta"><?php echo $row['created_at'] ?> by <a href="#"><?php echo $row['author'] ?></a></p>
+<?php 
+    if (isset($_GET['id'])) {
+        $post = $rowPost;
+    } else {
+        $post = $row;
+    }
+?>
 
-    <?php echo $row['body'] ?>
+<div class="blog-post">
+    <a href="single-post-page.php?id=<?php echo $post['id'] ?>">
+        <h2 class="blog-post-title"><?php echo $post['title'] ?></h2>
+    </a>
+    <p class="blog-post-meta"><?php echo $post['created_at'] ?> by <a href="#"><?php echo $post['author'] ?></a></p>
+
+    <?php echo $post['body'] ?>
 </div><!-- /.blog-post -->
